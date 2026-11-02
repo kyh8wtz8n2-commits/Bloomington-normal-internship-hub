@@ -1,128 +1,75 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bloomington-Internship Hub | Prototype</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Internship Hub</title>
 <style>
-:root{--green:#174d3a;--green2:#23664d;--mint:#eaf4ee;--ink:#1c2923;--muted:#637168;--line:#dce5df;--bg:#f7faf8;--white:#fff;--gold:#fff2d7}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
-header{background:var(--green);color:white;padding:28px 20px 34px}.wrap{max-width:1100px;margin:auto}.brand{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#c9e4d4}h1{font-size:clamp(30px,5vw,46px);line-height:1.12;margin:10px 0}header p{max-width:700px;color:#e0eee5;margin:0}
-nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px}nav button{background:transparent;border:1px solid #b8d6c5;color:white;border-radius:8px;padding:9px 12px;font-weight:700;cursor:pointer}nav button.active,nav button:hover{background:#d7eee0;color:var(--green)}
-main{padding:24px 18px 55px}.prototype{background:var(--gold);border:1px solid #ead9a7;padding:11px 14px;border-radius:10px;font-size:13px;margin-bottom:18px}.searchbar{display:flex;gap:9px;margin:16px 0}.searchbar input{flex:1;min-width:0;padding:13px;border:1px solid var(--line);border-radius:9px;font-size:16px}.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:700;cursor:pointer;background:var(--green);color:white}.btn.secondary{background:var(--mint);color:var(--green);border:1px solid var(--line)}.filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0 20px}.filters label{font-size:12px;font-weight:700;color:var(--muted)}select,input,textarea{font:inherit}.filters select,.admin-form input,.admin-form textarea,.admin-form select{display:block;width:100%;margin-top:5px;padding:10px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink)}.topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0 12px}.topline h2{font-size:21px;margin:0}.count{font-size:13px;color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.card,.panel{background:white;border:1px solid var(--line);border-radius:13px;padding:17px}.card h3{margin:0 0 3px;font-size:18px}.company{color:var(--muted);font-size:14px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.tag{font-size:12px;padding:3px 8px;border-radius:999px;background:var(--mint);color:var(--green);font-weight:650}.detail{font-size:14px;margin:9px 0}.meta{font-size:12px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}.card details{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;font-size:13px}.card summary{cursor:pointer;color:var(--green);font-weight:700}.card details p{margin:8px 0}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.actions a{color:var(--green);font-weight:700;text-decoration:none;padding:8px 0}.actions .contact-link{display:inline-block;background:var(--green);color:white;border-radius:9px;padding:10px 12px}.empty{background:white;border:1px dashed #b9c9bf;border-radius:12px;padding:25px;text-align:center;color:var(--muted);grid-column:1/-1}.page{display:none}.page.active{display:block}.panel h2{margin:0 0 8px;font-size:20px}.admin-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.admin-form .wide{grid-column:1/-1}.admin-form label{font-size:13px;font-weight:650}.saved-list{display:grid;gap:10px}.saved-row{background:white;border:1px solid var(--line);border-radius:10px;padding:13px;display:flex;justify-content:space-between;align-items:center;gap:12px}.small{font-size:12px;color:var(--muted)}.footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
-@media(max-width:720px){.filters{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr}.admin-form{grid-template-columns:1fr}.admin-form .wide{grid-column:auto}.searchbar{flex-direction:column}.topline{align-items:flex-start;flex-direction:column}}
+:root{--bg:#090d0a;--panel:#121914;--line:#2a382e;--text:#f2f5f2;--muted:#a8b4aa;--green:#23834b;--green2:#2c9a59}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:1100px;margin:auto;padding:0 20px}header{padding:25px 0;background:#0d130f;border-bottom:1px solid var(--line)}
+.brand{color:#9bd9ac;font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+h1{font-size:clamp(36px,6vw,54px);line-height:1.05;margin:8px 0}header p,.muted{color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}button,select,input,textarea{font:inherit}
+nav button,.btn{background:#202a23;color:#edf5ef;border:1px solid #3a4a3e;border-radius:9px;padding:10px 14px;cursor:pointer;text-decoration:none;font-weight:700}
+nav button.active,.btn.green{background:var(--green);border-color:var(--green);color:white}
+nav button:hover,.btn:hover{filter:brightness(1.15)}
+main{padding:25px 0 60px}.notice,.panel,.chapter,.job{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:17px}
+.notice{margin-bottom:22px;color:#c4cec6;font-size:13px}
+.page{display:none}.page.active{display:block}.head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:18px 0 13px}
+h2{margin:0;font-size:25px}.muted{font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.chapter{cursor:pointer}.chapter:hover{border-color:#43895a}.chapter h3,.job h3{margin:0 0 4px}.chapter p{margin:4px 0;color:var(--muted);font-size:13px}
+.search{display:flex;gap:9px;margin:18px 0 12px}.search input{flex:1}
+input,select,textarea{background:#0c120e;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:11px;width:100%}
+.filters{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0 20px}.filters label,.form label{font-size:12px;color:var(--muted);font-weight:700}
+.filters select{display:block;margin-top:5px}
+.company,.meta{color:var(--muted);font-size:13px}.tag{display:inline-block;background:#1b3323;color:#b3e5c0;border-radius:20px;padding:3px 9px;font-size:11px;margin:8px 5px 3px 0}
+.job p{font-size:14px;color:#d6dfd8}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.btn{display:inline-block;font-size:13px}.btn.green{background:var(--green)}
+.job details{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;font-size:13px;color:#d4ddd6}.job summary{color:#a9dfb7;cursor:pointer;font-weight:700}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);border:1px dashed #455448;border-radius:12px;padding:24px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form label{display:block}.form input,.form textarea{display:block;margin-top:5px}.wide{grid-column:1/-1}
+.saved{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:8px 0}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px;border-top:1px solid var(--line)}
+@media(max-width:650px){.grid,.filters,.form{grid-template-columns:1fr}.wide{grid-column:auto}.search{flex-direction:column}.head{align-items:start;flex-direction:column}}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-<div class="brand">Bloomington-Internship Hub</div>
-<h1>Your future starts locally.</h1>
-<p>A simple prototype to explore internship opportunities around Bloomington and Normal.</p>
-<nav>
-<button class="active" data-page="browse">Browse internships</button>
-<button data-page="saved">Saved jobs <span id="savedCount">0</span></button>
-<button data-page="admin">Admin demo</button>
-</nav>
-</div></header>
+<header><div class="wrap"><div class="brand">Local opportunity network</div><h1>Internship Hub</h1><p>Find local experience. Connect with employers. Build opportunities in your community.</p>
+<nav><button class="active" data-page="chapters">Chapters</button><button data-page="browse">All internships</button><button data-page="saved">Saved (<span id="savedCount">0</span>)</button><button data-page="request">Start a chapter</button></nav></div></header>
 <main class="wrap">
-<div class="prototype"><strong>Prototype notice:</strong> Listings below are starter examples based on the project draft, not a verified live feed. Saved jobs and admin edits stay in this browser only. Do not enter private information.</div>
-<section id="browse" class="page active">
-<div class="searchbar"><input id="q" type="search" placeholder="Search title, company, keyword, or career field…"><button class="btn" id="searchBtn">Search</button><button class="btn secondary" id="clearBtn">Clear</button></div>
-<div class="filters">
-<label>Location<select id="location"><option value="">Bloomington + Normal</option><option>Bloomington</option><option>Normal</option></select></label>
-<label>Category<select id="category"><option value="">All categories</option><option>Business</option><option>Finance</option><option>Marketing</option><option>Technology</option><option>Engineering</option><option>Agriculture</option><option>Healthcare</option></select></label>
-<label>Eligibility<select id="eligibility"><option value="">Any / not confirmed</option><option value="college">College enrollment required</option><option value="highschool">High school eligible</option><option value="unknown">Not confirmed</option></select></label>
-<label>Posted within<select id="days"><option value="">Any time</option><option value="1">Past 24 hours</option><option value="7">Past 7 days</option><option value="30">Past 30 days</option><option value="90">Past 90 days</option></select></label>
-</div>
-<div class="topline"><h2>Internship listings</h2><div class="count" id="resultCount"></div></div>
-<div class="cards" id="cards"></div>
-</section>
-<section id="saved" class="page">
-<div class="topline"><h2>Your saved internships</h2><div class="count">Saved only in this browser</div></div>
-<div class="saved-list" id="savedList"></div>
-</section>
-<section id="admin" class="page">
-<div class="panel">
-<h2>Admin demo: add a listing</h2>
-<p class="small">This is a prototype admin screen with no login or server protection. Changes are saved in this browser only. Don't publish private or unverified information.</p>
-<form class="admin-form" id="adminForm">
-<label>Internship title<input name="title" required placeholder="e.g. Marketing Intern"></label>
-<label>Company<input name="company" required placeholder="Employer name"></label>
-<label>Location<select name="location"><option>Bloomington</option><option>Normal</option></select></label>
-<label>Category<select name="category"><option>Business</option><option>Finance</option><option>Marketing</option><option>Technology</option><option>Engineering</option><option>Agriculture</option><option>Healthcare</option></select></label>
-<label>Eligibility<select name="eligibility"><option value="unknown">Not confirmed</option><option value="college">College enrollment required</option><option value="highschool">High school eligible</option></select></label>
-<label>Pay<input name="pay" placeholder="Not provided"></label>
-<label class="wide">Short description<textarea name="description" rows="2" required placeholder="What would the intern do?"></textarea></label>
-<label class="wide">Requirements<textarea name="requirements" rows="2" placeholder="Not provided"></textarea></label>
-<label>Deadline<input name="deadline" placeholder="Not provided"></label>
-<label>Original posting URL<input name="url" type="url" placeholder="https://..."></label>
-<label class="wide">Employer careers/contact page URL<input name="contactUrl" type="url" placeholder="https://... (optional; defaults to original posting)"></label>
-<div class="wide"><button class="btn" type="submit">Add listing</button></div>
-</form>
-</div>
-<div class="topline"><h2>Manage prototype listings</h2><div class="count">Remove any starter or added listing</div></div>
-<div class="saved-list" id="manageList"></div>
-</section>
-</main>
-<div class="footer">Bloomington-Internship Hub · Student-built prototype · Always verify openings with the employer.</div>
+<div class="notice"><b>Listing note:</b> These opportunities were identified in recent employer or job-board search results. Availability can change, and some roles may have closed. Check the employer's official careers page before applying. Listings do not guarantee eligibility for high-school students.</div>
+<section class="page active" id="chapters"><div class="head"><div><h2>Explore local chapters</h2><div class="muted">Chapters are organized by city or town.</div></div><span class="muted">2 starter chapters</span></div>
+<div class="grid"><article class="chapter" onclick="chooseTown('Bloomington')"><h3>Bloomington Chapter</h3><p>Internships located in or listed for Bloomington.</p><span class="tag">View opportunities</span></article>
+<article class="chapter" onclick="chooseTown('Normal')"><h3>Normal Chapter</h3><p>Internships located in or listed for Normal.</p><span class="tag">View opportunities</span></article></div>
+<div class="head"><h2>How chapters work</h2></div><div class="panel"><p>Internship Hub uses a chapter structure inspired by professional organizations, but each chapter represents a local city or town. Chapters can share nearby internships, local employers, and career opportunities.</p><p class="muted">Bloomington and Normal are the first chapters. Other towns can be requested, then added when active local opportunities are confirmed.</p></div></section>
+<section class="page" id="browse"><div class="head"><div><h2 id="browseTitle">All internships</h2><div class="muted">Search across the Bloomington and Normal chapters.</div></div></div>
+<div class="search"><input id="q" placeholder="Search employer, internship, or career field"><button class="btn green" id="searchBtn">Search</button><button class="btn" id="clearBtn">Clear</button></div>
+<div class="filters"><label>Chapter<select id="town"><option value="">All chapters</option><option>Bloomington</option><option>Normal</option></select></label><label>Career field<select id="field"><option value="">All fields</option><option>Business</option><option>Finance</option><option>Technology</option><option>Engineering</option><option>Marketing</option></select></label></div>
+<div class="head"><h2>Internship listings</h2><span class="muted" id="count"></span></div><div class="grid" id="jobs"></div></section>
+<section class="page" id="saved"><div class="head"><h2>Saved internships</h2></div><div id="savedJobs"></div></section>
+<section class="page" id="request"><div class="panel"><h2>Bring Internship Hub to your town</h2><p class="muted">Submit a request for a chapter in your community. This prototype saves requests in this browser only; it does not send them to an administrator.</p>
+<form class="form" id="requestForm"><label>Town or city<input name="town" required placeholder="e.g. Heyworth"></label><label>Your name or organization<input name="name" placeholder="Optional"></label><label class="wide">Why should your town have a chapter?<textarea name="reason" rows="3"></textarea></label><label class="wide">Contact email (optional)<input type="email" name="email" placeholder="you@example.com"></label><div class="wide"><button class="btn green">Submit request</button></div></form><p id="requestMsg" class="muted"></p></div><div class="panel" style="margin-top:14px"><h2>Requests in this browser</h2><div id="requests"></div></div></section>
+</main><footer>Internship Hub · Local chapters, local opportunities</footer>
 <script>
-const seed = [
-{id:"sf-claims",title:"Summer 2027 Intern – Property & Casualty Claims",company:"State Farm",location:"Bloomington",category:"Finance",eligibility:"college",posted:"2026-10-20",pay:"$24/hour plus a $2,000 stipend (verify on employer page)",description:"Explore claims work including investigation, evaluation, negotiation, and insurance operations. The employer describes mentorship and exposure to multiple claims areas.",requirements:"The draft posting described students entering sophomore, junior, or senior year; verify all requirements with State Farm.",deadline:"Not confirmed",url:"https://jobs.statefarm.com/become-an-intern/jobs/46257?lang=en-us",contactUrl:"https://jobs.statefarm.com/"},
-{id:"sf-dev",title:"Summer 2027 Intern – Software Developer",company:"State Farm",location:"Bloomington",category:"Technology",eligibility:"college",posted:"2026-10-23",pay:"Not provided",description:"Software development internship related to application and process automation.",requirements:"Confirm degree, experience, and eligibility on the employer page.",deadline:"Not confirmed",url:"https://www.linkedin.com/jobs/view/summer-2027-intern-hr-d-software-developer-at-state-farm-4469496382",contactUrl:"https://jobs.statefarm.com/"},
-{id:"rivian-supply",title:"Business and Administrative Intern – Supply Chain and Logistics",company:"Rivian",location:"Normal",category:"Business",eligibility:"college",posted:"2026-10-14",pay:"Not provided",description:"Business and administrative work connected to supply chain and logistics.",requirements:"The earlier draft says undergraduate or graduate enrollment is required. Confirm on the employer page.",deadline:"Not confirmed",url:"https://careers.rivian.com/careers-home/jobs/33791",contactUrl:"https://careers.rivian.com/"},
-{id:"growmark",title:"Explore GROWMARK Internships",company:"GROWMARK / FS",location:"Bloomington",category:"Agriculture",eligibility:"college",posted:"",pay:"Varies by position",description:"Program page covering possible internships in agronomy, energy, grain, accounting, sales, customer service, and business operations.",requirements:"Check individual openings for education, location, and qualifications.",deadline:"Depends on role",url:"https://jobs.growmark.com/content/Internships/?locale=en_US",contactUrl:"https://jobs.growmark.com/"},
-{id:"chestnut",title:"Student Internship / Prevention",company:"Chestnut Health Systems",location:"Bloomington",category:"Healthcare",eligibility:"unknown",posted:"2026-10-26",pay:"Not provided",description:"Student internship in prevention services; current details need to be confirmed.",requirements:"Check the organization’s current careers page for age, education, and placement requirements.",deadline:"Not confirmed",url:"https://www.chestnut.org/careers/",contactUrl:"https://www.chestnut.org/careers/"}
+const listings=[
+{id:'sfbiz',title:'2027 Summer Intern – Organizational Change Management',company:'State Farm',town:'Bloomington',field:'Business',desc:'Summer 2027 internship supporting organizational change work. Search result listed pay at $24/hour.',req:'Review the official listing for degree, schedule, and eligibility requirements.',pay:'Listed at $24/hour',url:'https://www.statefarm.com/careers',contact:'https://www.statefarm.com/customer-care/contact-us'},
+{id:'commerce',title:'Intern – Business Banking, Illinois (Summer 2027)',company:'Commerce Bank',town:'Bloomington',field:'Finance',desc:'Summer 2027 business banking internship with business projects, professional development, and networking. Listed at $20/hour.',req:'The role is described as a full-time Summer 2027 internship. Review the employer posting for work authorization and enrollment requirements.',pay:'Listed at $20/hour',url:'https://careers.commercebank.com/us/en/job/38474/Intern-Business-Banking-Illinois-Summer-2027'},
+{id:'growmarkpc',title:'Project Coordination Intern',company:'GROWMARK',town:'Bloomington',field:'Business',desc:'Project coordination internship listed in Bloomington. Search result reported $19/hour.',req:'Check GROWMARK careers for current application status and qualifications.',pay:'Listed at $19/hour',url:'https://jobs.growmark.com/',contact:'mailto:recruiting@growmark.com'},
+{id:'growmarkit',title:'IT Innovation Intern',company:'GROWMARK',town:'Bloomington',field:'Technology',desc:'Technology-focused internship listed in Bloomington. Search result reported $23/hour.',req:'Check GROWMARK careers for current application status and qualifications.',pay:'Listed at $23/hour',url:'https://jobs.growmark.com/',contact:'mailto:recruiting@growmark.com'},
+{id:'doubletree',title:'Sales and Social Media Intern',company:'DoubleTree by Hilton Bloomington',town:'Bloomington',field:'Marketing',desc:'Sales, social media, and hotel catering support internship. Search result reported $15/hour.',req:'Confirm current opening, schedule, and eligibility on Hilton careers.',pay:'Listed at $15/hour',url:'https://jobs.hilton.com/'},
+{id:'cintas',title:'Intern',company:'Cintas',town:'Normal',field:'Business',desc:'Business and professional-services internship with exposure to multiple departments. Listed pay range: $15–$20/hour.',req:'The posting describes a high school diploma or GED and current enrollment in a bachelor’s degree program as requirements.',pay:'$15–$20/hour',url:'https://careers.cintas.com/job/Normal-Intern-IL-61761/1432914300/'},
+{id:'rivian',title:'Supply Chain, Purchasing, Procurement and Logistics Internships (Summer 2027)',company:'Rivian',town:'Normal',field:'Engineering',desc:'Summer 2027 internship program application covering supply chain, purchasing, procurement, and logistics.',req:'Rivian states applicants must be actively enrolled in an accredited undergraduate or graduate program. Check the posting for graduation-date requirements.',pay:'Not stated',url:'https://careers.rivian.com/careers-home/jobs/34297?lang=en-US'},
+{id:'jj',title:'HR Intern (Fall 2026)',company:'Jimmy John’s / Premium Loaves',town:'Normal',field:'Business',desc:'In-office HR internship listed for October through December 2026, supporting onboarding, employee records, payroll support, and benefits administration. Search result reported $16–$18/hour.',req:'Confirm whether the employer is still accepting applications and check eligibility.',pay:'Listed at $16–$18/hour',url:'https://www.indeed.com/q-intern-l-normal,-il-jobs.html'}
 ];
-const STORE="bih-prototype-listings-v1", SAVED="bih-prototype-saved-v1";
-const read=(k,fallback)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??fallback}catch{return fallback}};
-let jobs=read(STORE,seed), saved=read(SAVED,[]);
-const $=id=>document.getElementById(id);
-function write(){localStorage.setItem(STORE,JSON.stringify(jobs));localStorage.setItem(SAVED,JSON.stringify(saved))}
-function safeUrl(u){try{const x=new URL(u);return ["http:","https:"].includes(x.protocol)?x.href:"#"}catch{return "#"}}
-function labelEligibility(v){return v==="college"?"College enrollment required":v==="highschool"?"High school eligible":"Not confirmed"}
-function render(){
- const q=$("q").value.trim().toLowerCase(),loc=$("location").value,cat=$("category").value,elig=$("eligibility").value,days=$("days").value;
- const list=jobs.filter(j=>{
-  const hay=[j.title,j.company,j.description,j.requirements,j.category,j.location].join(" ").toLowerCase();
-  const age=j.posted?(Date.now()-new Date(j.posted+"T12:00:00").getTime())/86400000:Infinity;
-  return (!q||hay.includes(q))&&(!loc||j.location===loc)&&(!cat||j.category===cat)&&(!elig||j.eligibility===elig)&&(!days||(j.posted&&age<=Number(days)));
- });
- $("resultCount").textContent=`${list.length} matching ${list.length===1?"listing":"listings"}`;
- $("cards").replaceChildren();
- if(!list.length){$("cards").innerHTML='<div class="empty">No matches. Try another keyword or clear a filter.</div>';return}
- list.forEach(j=>{
-  const article=document.createElement("article");article.className="card";
-  const savedNow=saved.includes(j.id);
-  article.innerHTML=`<h3></h3><div class="company"></div><div class="tags"><span class="tag"></span><span class="tag"></span></div><p class="detail"></p><div class="meta"></div><details><summary>Full details</summary><div class="detailbox"></div></details><div class="actions"><button class="btn secondary save"></button><a class="contact-link" target="_blank" rel="noopener noreferrer">Contact Employer ↗</a><a class="posting-link" target="_blank" rel="noopener noreferrer">Open original posting ↗</a></div>`;
-  article.querySelector("h3").textContent=j.title;article.querySelector(".company").textContent=`${j.company} · ${j.location}, IL`;
-  article.querySelectorAll(".tag")[0].textContent=j.category;article.querySelectorAll(".tag")[1].textContent=labelEligibility(j.eligibility);
-  article.querySelector(".detail").textContent=j.description;
-  article.querySelector(".meta").textContent=`Posted: ${j.posted||"Not provided"} · Pay: ${j.pay||"Not provided"} · Deadline: ${j.deadline||"Not provided"}`;
-  const box=article.querySelector(".detailbox");
-  [["Requirements",j.requirements],["Pay",j.pay],["Deadline",j.deadline],["Posted date",j.posted||"Not provided"]].forEach(([k,v])=>{const p=document.createElement("p"),b=document.createElement("strong");b.textContent=k+": ";p.append(b,document.createTextNode(v||"Not provided"));box.append(p)});
-  const saveBtn=article.querySelector(".save");saveBtn.textContent=savedNow?"★ Saved — remove":"☆ Save internship";
-  saveBtn.onclick=()=>{savedNow?saved=saved.filter(x=>x!==j.id):saved.push(j.id);write();render();renderSaved();renderManage()};
-  const contact=article.querySelector(".contact-link");contact.href=safeUrl(j.contactUrl||j.url);if(contact.href.endsWith("#")){contact.textContent="No employer contact link provided";contact.removeAttribute("target")}
-  const link=article.querySelector(".posting-link");link.href=safeUrl(j.url);if(link.href.endsWith("#")){link.textContent="No original link provided";link.removeAttribute("target")}
-  $("cards").append(article);
- });
-}
-function renderSaved(){
- $("savedCount").textContent=saved.length;
- const target=$("savedList");target.replaceChildren();
- const list=jobs.filter(j=>saved.includes(j.id));
- if(!list.length){target.innerHTML='<div class="empty">You have not saved any internships yet. Go to Browse internships and press “Save internship.”</div>';return}
- list.forEach(j=>{const row=document.createElement("div");row.className="saved-row";const text=document.createElement("div");text.innerHTML="<strong></strong><div class='small'></div>";text.querySelector("strong").textContent=j.title;text.querySelector(".small").textContent=j.company+" · "+j.location;const btn=document.createElement("button");btn.className="btn secondary";btn.textContent="Remove";btn.onclick=()=>{saved=saved.filter(x=>x!==j.id);write();render();renderSaved()};row.append(text,btn);target.append(row)});
-}
-function renderManage(){
- const target=$("manageList");target.replaceChildren();
- jobs.forEach(j=>{const row=document.createElement("div");row.className="saved-row";const text=document.createElement("div");text.innerHTML="<strong></strong><div class='small'></div>";text.querySelector("strong").textContent=j.title;text.querySelector(".small").textContent=j.company+" · "+j.location;const btn=document.createElement("button");btn.className="btn secondary";btn.textContent="Delete";btn.onclick=()=>{if(confirm("Delete this prototype listing?")){jobs=jobs.filter(x=>x.id!==j.id);saved=saved.filter(x=>x!==j.id);write();render();renderSaved();renderManage()}};row.append(text,btn);target.append(row)});
-}
-document.querySelectorAll("nav button").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===btn.dataset.page));if(btn.dataset.page==="saved")renderSaved();if(btn.dataset.page==="admin")renderManage()}));
-$("searchBtn").onclick=render;$("q").addEventListener("keydown",e=>{if(e.key==="Enter")render()});
-["location","category","eligibility","days"].forEach(id=>$(id).addEventListener("change",render));
-$("clearBtn").onclick=()=>{$("q").value="";["location","category","eligibility","days"].forEach(id=>$(id).value="");render()};
-$("adminForm").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.currentTarget),title=f.get("title").trim();jobs.unshift({id:"custom-"+Date.now(),title,company:f.get("company").trim(),location:f.get("location"),category:f.get("category"),eligibility:f.get("eligibility"),posted:new Date().toISOString().slice(0,10),pay:f.get("pay").trim()||"Not provided",description:f.get("description").trim(),requirements:f.get("requirements").trim()||"Not provided",deadline:f.get("deadline").trim()||"Not provided",url:f.get("url").trim(),contactUrl:f.get("contactUrl").trim()});write();e.currentTarget.reset();render();renderManage();alert("Listing added to this browser's prototype.");});
-render();renderSaved();renderManage();
+const key='ih_fixed_saved',requestKey='ih_fixed_requests';let saved=JSON.parse(localStorage.getItem(key)||'[]'),requests=JSON.parse(localStorage.getItem(requestKey)||'[]');
+const $=id=>document.getElementById(id);function show(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id));if(id==='browse')render();if(id==='saved')renderSaved();if(id==='request')renderRequests()}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.page)));
+function chooseTown(t){$('town').value=t;$('browseTitle').textContent=t+' Chapter internships';show('browse')}
+function render(){let q=$('q').value.toLowerCase(),t=$('town').value,f=$('field').value;let a=listings.filter(x=>(!q||(x.title+x.company+x.desc+x.field+x.town).toLowerCase().includes(q))&&(!t||x.town===t)&&(!f||x.field===f));$('count').textContent=a.length+' listings';$('jobs').replaceChildren();if(!a.length){$('jobs').innerHTML='<div class="empty">No listings match those filters.</div>';return}a.forEach(x=>{let el=document.createElement('article');el.className='job';let title=document.createElement('h3');title.textContent=x.title;let co=document.createElement('div');co.className='company';co.textContent=x.company+' · '+x.town+' Chapter';let tag=document.createElement('span');tag.className='tag';tag.textContent=x.field;let desc=document.createElement('p');desc.textContent=x.desc;let meta=document.createElement('div');meta.className='meta';meta.textContent='Found in recent search results · Confirm availability with employer';let det=document.createElement('details');let sum=document.createElement('summary');sum.textContent='Requirements and pay';let req=document.createElement('p');req.textContent='Requirements: '+x.req;let pay=document.createElement('p');pay.textContent='Pay: '+x.pay;det.append(sum,req,pay);let acts=document.createElement('div');acts.className='actions';let save=document.createElement('button');save.className='btn';save.textContent=saved.includes(x.id)?'★ Saved':'☆ Save';save.onclick=()=>{saved=saved.includes(x.id)?saved.filter(i=>i!==x.id):[...saved,x.id];localStorage.setItem(key,JSON.stringify(saved));render();renderSaved()};let link=document.createElement('a');link.className='btn green';link.href=x.url;link.target='_blank';link.rel='noopener';link.textContent='View employer posting ↗';acts.append(save,link);if(x.contact&&x.contact!==x.url){let c=document.createElement('a');c.className='btn green';c.href=x.contact;c.textContent='Contact employer ↗';if(!x.contact.startsWith('mailto:')){c.target='_blank';c.rel='noopener'}acts.append(c)}el.append(title,co,tag,desc,meta,det,acts);$('jobs').append(el)})}
+$('searchBtn').onclick=render;$('q').onkeydown=e=>{if(e.key==='Enter')render()};$('town').onchange=render;$('field').onchange=render;$('clearBtn').onclick=()=>{$('q').value='';$('town').value='';$('field').value='';$('browseTitle').textContent='All internships';render()};
+function renderSaved(){$('savedCount').textContent=saved.length;let box=$('savedJobs');box.replaceChildren();let a=listings.filter(x=>saved.includes(x.id));if(!a.length){box.innerHTML='<div class="empty">No saved internships yet.</div>';return}a.forEach(x=>{let d=document.createElement('div');d.className='panel saved';let s=document.createElement('span');s.textContent=x.title+' · '+x.company;let b=document.createElement('button');b.className='btn';b.textContent='Remove';b.onclick=()=>{saved=saved.filter(i=>i!==x.id);localStorage.setItem(key,JSON.stringify(saved));renderSaved();render()};d.append(s,b);box.append(d)})}
+$('requestForm').onsubmit=e=>{e.preventDefault();let f=new FormData(e.target);requests.push({town:f.get('town'),name:f.get('name')});localStorage.setItem(requestKey,JSON.stringify(requests));e.target.reset();$('requestMsg').textContent='Request saved in this browser demo; it has not been sent to an administrator.';renderRequests()};
+function renderRequests(){$('requests').replaceChildren();if(!requests.length){$('requests').textContent='No chapter requests yet.';return}requests.forEach(r=>{let p=document.createElement('p');p.textContent=r.town+' — '+(r.name||'Community request');$('requests').append(p)})}
+renderSaved();
 </script>
 </body></html>
