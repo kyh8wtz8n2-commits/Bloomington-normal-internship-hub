@@ -50,7 +50,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:25px;border-t
 <div class="head"><h2>Internship listings</h2><span class="muted" id="count"></span></div><div class="grid" id="jobs"></div></section>
 <section class="page" id="saved"><div class="head"><h2>Saved internships</h2></div><div id="savedJobs"></div></section>
 <section class="page" id="request"><div class="panel"><h2>Bring Internship Hub to your town</h2><p class="muted">Submit a request for a chapter in your community. Your request will be emailed to the Internship Hub administrator for review.</p>
-<form class="form" id="requestForm" action="https://formsubmit.co/kylejcoffey@gmail.com" method="POST"><input type="hidden" name="_subject" value="New Internship Hub Chapter Request"><input type="hidden" name="_template" value="table"><label>Town or city<input name="town" required placeholder="e.g. Heyworth"></label><label>Your name or organization<input name="name" placeholder="Optional"></label><label class="wide">Why should your town have a chapter?<textarea name="reason" rows="3"></textarea></label><label class="wide">Contact email (optional)<input type="email" name="email" placeholder="you@example.com"></label><div class="wide"><button class="btn green">Submit request</button></div></form><p id="requestMsg" class="muted">Requests are sent by email for review. New towns are added only after approval and confirmation of local internship opportunities.</p></div></section>
+<form class="form" id="requestForm" action="https://formsubmit.co/ajax/kylejcoffey@gmail.com" method="POST"><input type="hidden" name="_subject" value="New Internship Hub Chapter Request"><input type="hidden" name="_template" value="table"><label>Town or city<input name="town" required placeholder="e.g. Heyworth"></label><label>Your name or organization<input name="name" placeholder="Optional"></label><label class="wide">Why should your town have a chapter?<textarea name="reason" rows="3"></textarea></label><label class="wide">Contact email (optional)<input type="email" name="email" placeholder="you@example.com"></label><div class="wide"><button class="btn green">Submit request</button></div></form><p id="requestMsg" class="muted">Requests are sent by email for review. New towns are added only after approval and confirmation of local internship opportunities.</p></div></section>
 </main><footer>Internship Hub · Local chapters, local opportunities</footer>
 <script>
 const listings=[
@@ -74,7 +74,35 @@ function chooseTown(t){$('town').value=t;$('browseTitle').textContent=t+' Chapte
 function render(){let q=$('q').value.toLowerCase(),t=$('town').value,f=$('field').value;let a=listings.filter(x=>(!q||(x.title+x.company+x.desc+x.field+x.town).toLowerCase().includes(q))&&(!t||x.town===t)&&(!f||x.field===f));$('count').textContent=a.length+' listings';$('jobs').replaceChildren();if(!a.length){$('jobs').innerHTML='<div class="empty">No listings match those filters.</div>';return}a.forEach(x=>{let el=document.createElement('article');el.className='job';let title=document.createElement('h3');title.textContent=x.title;let co=document.createElement('div');co.className='company';co.textContent=x.company+' · '+x.town+' Chapter';let tag=document.createElement('span');tag.className='tag';tag.textContent=x.field;let desc=document.createElement('p');desc.textContent=x.desc;let meta=document.createElement('div');meta.className='meta';meta.textContent='Found in recent search results · Confirm availability with employer';let det=document.createElement('details');let sum=document.createElement('summary');sum.textContent='Requirements and pay';let req=document.createElement('p');req.textContent='Requirements: '+x.req;let pay=document.createElement('p');pay.textContent='Pay: '+x.pay;det.append(sum,req,pay);let acts=document.createElement('div');acts.className='actions';let save=document.createElement('button');save.className='btn';save.textContent=saved.includes(x.id)?'★ Saved':'☆ Save';save.onclick=()=>{saved=saved.includes(x.id)?saved.filter(i=>i!==x.id):[...saved,x.id];localStorage.setItem(key,JSON.stringify(saved));render();renderSaved()};let link=document.createElement('a');link.className='btn green';link.href=x.url;link.target='_blank';link.rel='noopener';link.textContent='View employer posting ↗';acts.append(save,link);if(x.contact&&x.contact!==x.url){let c=document.createElement('a');c.className='btn green';c.href=x.contact;c.textContent='Contact employer ↗';if(!x.contact.startsWith('mailto:')){c.target='_blank';c.rel='noopener'}acts.append(c)}el.append(title,co,tag,desc,meta,det,acts);$('jobs').append(el)})}
 $('searchBtn').onclick=render;$('q').onkeydown=e=>{if(e.key==='Enter')render()};$('town').onchange=render;$('field').onchange=render;$('clearBtn').onclick=()=>{$('q').value='';$('town').value='';$('field').value='';$('browseTitle').textContent='All internships';render()};
 function renderSaved(){$('savedCount').textContent=saved.length;let box=$('savedJobs');box.replaceChildren();let a=listings.filter(x=>saved.includes(x.id));if(!a.length){box.innerHTML='<div class="empty">No saved internships yet.</div>';return}a.forEach(x=>{let d=document.createElement('div');d.className='panel saved';let s=document.createElement('span');s.textContent=x.title+' · '+x.company;let b=document.createElement('button');b.className='btn';b.textContent='Remove';b.onclick=()=>{saved=saved.filter(i=>i!==x.id);localStorage.setItem(key,JSON.stringify(saved));renderSaved();render()};d.append(s,b);box.append(d)})}
-// Chapter requests are submitted securely through the hosted form endpoint; FormSubmit emails them to the administrator.
+// Send chapter requests with AJAX so the page does not navigate away or hang on a form redirect.
+const requestForm = $('requestForm');
+if (requestForm) {
+  requestForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const submitButton = requestForm.querySelector('button[type="submit"], button:not([type])');
+    const message = $('requestMsg');
+    const originalText = submitButton ? submitButton.textContent : 'Submit request';
+    if (submitButton) { submitButton.disabled = true; submitButton.textContent = 'Sending…'; }
+    if (message) message.textContent = 'Sending your request…';
+    try {
+      const response = await fetch(requestForm.action, {
+        method: 'POST',
+        body: new FormData(requestForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      const result = await response.json();
+      if (!response.ok || result.success === 'false' || result.success === false) {
+        throw new Error(result.message || 'The email service did not accept the request.');
+      }
+      if (message) message.textContent = 'Request submitted. If this is the first submission, check kylejcoffey@gmail.com for FormSubmit’s activation email and confirm it.';
+      requestForm.reset();
+    } catch (error) {
+      if (message) message.textContent = 'The request could not be sent. Check your internet connection and try again. If this is your first submission, confirm the FormSubmit activation email sent to kylejcoffey@gmail.com. Details: ' + error.message;
+    } finally {
+      if (submitButton) { submitButton.disabled = false; submitButton.textContent = originalText; }
+    }
+  });
+}
 renderSaved();
 </script>
 </body></html>
